@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalShop - Цифровые товары для геймеров</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка с навигацией -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <h1>DigitalShop</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#products">Товары</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                <li class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></li>
+            </ul>
+       
+       
+       <!-- ... (остальной код без изменений до модалки) -->
+
+<!-- Модальное окно корзины -->
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleCart()">&times;</span>
+        <h2>Корзина</h2>
+        <div id="cart-items"></div>
+        <p id="total-price">Итого: 0 руб.</p>
+        
+        <!-- Новая секция: Выбор метода оплаты -->
+        <div id="payment-section" style="display: none;">
+            <h3>Выберите способ оплаты</h3>
+            <select id="payment-method">
+                <option value="qiwi">QIWI (КИВИ)</option>
+                <option value="yoomoney">YooMoney</option>
+                <option value="paypal">PayPal</option>
+            </select>
+            <div id="payment-buttons"></div>
+            <p><small>После оплаты вы вернетесь на сайт автоматически. Товары (коды/аккаунты) придут на email.</small></p>
+        </div>
+        
+        <button id="checkout-btn" class="checkout-btn" onclick="processPayment()">Оформить заказ</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+        </nav>
+    </header>
+    <!-- Герой-секция -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2 class="animate-slide">Добро пожаловать в DigitalShop!</h2>
+            <p class="animate-slide">Купи цифровые товары для Minecraft, Roblox, Hypixel, Discord Nitro и пополни Steam мгновенно. Безопасно и быстро!</p>
+            <button class="cta-btn animate-bounce" onclick="scrollToProducts()">Купить сейчас</button>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Секция товаров -->
+    <section id="products" class="products">
+        <h2 class="section-title animate-fade">Наши товары</h2>
+        <div class="products-grid">
+            <!-- Карточка 1: Minecraft -->
+            <div class="product-card animate-slide-up">
+                <img src="images/OIP.webp" alt="Minecraft">
+                <h3>Minecraft Аккаунт Premium</h3>
+                <p>Полный доступ к серверу, скины и моды. Цена: 500 руб.</p>
+                <button class="buy-btn" onclick="addToCart('Minecraft Аккаунт', 500)">Добавить в корзину</button>
+            </div>
+
+            <!-- Карточка 2: Roblox -->
+            <div class="product-card animate-slide-up">
+                <img src="images/roblox.png.webp" alt="Roblox">
+                <h3>Roblox 1000 Robux</h3>
+                <p>Виртуальная валюта для покупки аватаров и игр. Цена: 300 руб.</p>
+                <button class="buy-btn" onclick="addToCart('Roblox 1000 Robux', 300)">Добавить в корзину</button>
+            </div>
+
+            <!-- Карточка 3: Hypixel -->
+            <div class="product-card animate-slide-up">
+                <img src="images/OIP (1).webp" alt="Hypixel">
+                <h3>Hytael Ключ Игры</h3>
+                <p>Игра hytale сервер Cкоро Примерная. Цена: 800 руб.</p>
+                <button class="buy-btn" onclick="addToCart('Hypixel VIP', 800)">Добавить в корзину</button>
+            </div>
+
+            <!-- Карточка 4: Discord Nitro -->
+            <div class="product-card animate-slide-up">
+                <img src="images/nitro.png.webp" alt="Discord Nitro">
+                <h3>Discord Nitro 1 Месяц</h3>
+                <p>Премиум-подписка с кастом эмодзи и HD-стримом. Цена: 400 руб.</p>
+                <button class="buy-btn" onclick="addToCart('Discord Nitro', 400)">Добавить в корзину</button>
+            </div>
+
+            <!-- Карточка 5: Steam Пополнение -->
+            <div class="product-card animate-slide-up">
+                <img src="images/steam-logo-steam-icon-transparent-free-png.webp" alt="Steam">
+                <h3>Пополнение Steam 500 руб.</h3>
+                <p>Мгновенное зачисление на баланс Steam. Цена: 500 руб.</p>
+                <button class="buy-btn" onclick="addToCart('Steam 500 руб.', 500)">Добавить в корзину</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция о нас -->
+    <section id="about" class="about">
+        <h2 class="section-title animate-fade">О нас</h2>
+        <p class="animate-slide">Мы — надёжный магазин цифровых товаров для геймеров. Все покупки автоматические, поддержка 24/7. Без обмана!</p>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contact" class="footer">
+        <p>&copy; 2025 DigitalShop. Все права защищены. Контакты: email@digitalshop.ru</p>
+    </footer>
+
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <p id="total-price">Итого: 0 руб.</p>
+            <button class="checkout-btn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
